@@ -1,4 +1,4 @@
-QT += widgets core gui  # Add required modules
+QT += widgets core gui network # Add required modules
 
 SOURCES += main.cpp  # Add source files
 
