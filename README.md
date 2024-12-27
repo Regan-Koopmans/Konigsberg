@@ -1,8 +1,6 @@
-# Königsberg
-
-Königsberg is a simple GraphQL client.
-
 <p align="center">
+    <h1>Königsberg</h1>
+    <h2>A simple GraphQL client</h2>
     <img width="200" src="/screenshots/main.jpg"/>
 </p>
 
