@@ -1,7 +1,8 @@
-<p align="center">
-    <h1>Königsberg</h1>
+   <h1>Königsberg</h1>
     <h2>A simple GraphQL client</h2>
-    <img width="200" src="/screenshots/main.jpg"/>
+<p align="center">
+ 
+    <img width="300" src="/screenshots/main.jpg"/>
 </p>
 
 ## Building
