@@ -1,7 +1,12 @@
-# Königsberg
 
+<div align="center">
+<h1 align="center">Königsberg</h1>
 <p align="center">
-    <img width="300" src="/screenshots/main.jpg"/>
+    A simple but effective GraphQL client
+</p>
+</div>
+<p align="center">
+    <img width="400" src="/screenshots/main.jpg"/>
 </p>
 
 ## Building
