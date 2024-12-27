@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
   QApplication::setPalette(palette);
 
   QWidget window;
-  window.setWindowTitle("Practical");
+  window.setWindowTitle("Königsberg");
   QVBoxLayout *layout = new QVBoxLayout(&window);
 
   QFont *monoFont = new QFont;
@@ -60,6 +60,7 @@ int main(int argc, char *argv[]) {
                    });
 
   QObject::connect(button, &QPushButton::clicked, [=]() {
+    responseTextEdit->setPlainText("");
     QNetworkRequest *request = new QNetworkRequest;
     request->setUrl(QUrl(lineEdit->displayText()));
     QString byteArray = queryTextEdit->toPlainText();
