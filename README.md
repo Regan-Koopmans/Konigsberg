@@ -19,3 +19,9 @@ qmake .
 make
 ./kberg
 ```
+
+# FAQs
+
+**Why build a new client?**
+
+I wanted something lighter than existing clients like Graphiql, but something more than raw HTTP requests with `curl`.
