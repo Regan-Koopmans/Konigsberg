@@ -1,5 +1,10 @@
 #include <QApplication>
+#include <QByteArray>
 #include <QFont>
+#include <QHttpMultiPart>
+#include <QHttpPart>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLabel>
 #include <QLineEdit>
 #include <QNetworkAccessManager>
@@ -22,7 +27,7 @@ int main(int argc, char *argv[]) {
   QApplication::setPalette(palette);
 
   QWidget window;
-  window.setWindowTitle("GetRekt");
+  window.setWindowTitle("Practical");
   QVBoxLayout *layout = new QVBoxLayout(&window);
 
   QFont *monoFont = new QFont;
@@ -31,10 +36,10 @@ int main(int argc, char *argv[]) {
   monoFont->setStyleHint(QFont::TypeWriter);
 
   QLabel *label = new QLabel("Server");
-  QLineEdit *lineEdit = new QLineEdit();
+  QLineEdit *lineEdit = new QLineEdit("https://spacex-production.up.railway.app/");
   lineEdit->setFont(*monoFont);
   QPlainTextEdit *queryTextEdit = new QPlainTextEdit();
-  queryTextEdit->setPlainText("query {}");
+  queryTextEdit->setPlainText("query {\n    company {\n        ceo\n    }\n}");
   queryTextEdit->setFont(*monoFont);
   QPlainTextEdit *responseTextEdit = new QPlainTextEdit();
   responseTextEdit->setFont(*monoFont);
@@ -46,7 +51,7 @@ int main(int argc, char *argv[]) {
   QObject::connect(manager, &QNetworkAccessManager::finished,
                    [=](QNetworkReply *reply) {
                      if (reply->error()) {
-		       responseTextEdit->setPlainText(reply->errorString());
+                       responseTextEdit->setPlainText(reply->errorString());
                        return;
                      }
 
@@ -57,7 +62,16 @@ int main(int argc, char *argv[]) {
   QObject::connect(button, &QPushButton::clicked, [=]() {
     QNetworkRequest *request = new QNetworkRequest;
     request->setUrl(QUrl(lineEdit->displayText()));
-    manager->get(*request);
+    QString byteArray = queryTextEdit->toPlainText();
+    request->setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject json;
+    json.insert("query", byteArray);
+
+    QJsonDocument doc(json);
+    QByteArray postData = doc.toJson();
+
+    manager->post(*request, postData);
   });
 
   layout->addWidget(label);
